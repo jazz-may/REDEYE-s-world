@@ -1,19 +1,16 @@
-let cloudOne= 50 ; //variabl for x coordinate of cloud
-var darksun =0;  //color of sun
-let rabbitY=300; //y position
-let velocity= -12; // jump speed
-let gravity=0; //falling force
-let groundY=300; //ground level
-let bounce= -12; // check if in air
+let cloudOne= 50 ; //variabl for x position of cloud
+var moonFade =255;  //moon fade level
+let fadeSpeed=-2; //moon fading speed
+let showEgg= false; // secret egg hidden at first
 
 //The setup function only happens once
 function setup() {
-	createCanvas(600, 400); //create a canvas
+	createCanvas(windowWidth/2,500); //create a canvas
 }
 
 //The draw function happens over and over again
 function draw() {
-  background(135, 206, 235); //skyblue background
+  background(20, 24, 82); //nightsky background
 
 //sun
   fill(255,218,0);
@@ -21,45 +18,69 @@ function draw() {
   strokeWeight(20);
   ellipse(530, 59, 110); //(x,y,size)
  
- //darkcircle
-  fill(59,31,2,darksun);
-  stroke(59,31,2);
-  strokeWeight(0);
-  ellipse(530,59,110,110);
+//twinkle star
+	for( let star=0; star<40; star++){ // draw star til it reach 40
+		let x= random(width);
+		let y= random(0,250);
+		let size= random(2,6);}
+// moon fading
+	moonFade+= fadeSpeed;
+	if( moonFade<120|| moonFade> 250){ 
+		fadeSpeed= fadespeed*-1;}
+	fill(255, 245, 180, moonFade);
+	noStroke();
+	ellipse(width - 100, 80, 100, 100);
+	
+ /// grass
+fill(20, 80, 30);
+noStroke();
+rect(0, 300, width, 200);
+	
 
- //grass 
- fill (35,94,4);
- strokeWeight(0);
- rect (0,200,600,200);//(x,y,wid,hei)
-
-//draw
- //face
- fill(247,104,198);
- stroke(255,8,170);
- strokeWeight(6);
- rect(400,rabbitY,90,50);
-
-//ears
- stroke(252,237,131);
- ellipse(385,289,35);
-
- stroke(252,237,131);
- ellipse(502,289,35);
-
-//move rabbit
- rabbitY += velocity;
- velocity += gravity;
-
- // Stop rabbit at ground level
-if (rabbitY >= groundY){
-
-// Keep rabbit on ground
-rabbitY = groundY;
-
-// Stop automatic jumping
-velocity = 0;
+// secret egg behind moon
+if(showEgg == true){
+fill(255);
+stroke(255, 120, 180);
+strokeWeight(5);
+ellipse(width - 100, 80, 60, 80);
+	
+fill(255, 120, 180);
+noStroke();
+ellipse(width - 100, 70, 15, 15);
+ellipse(width - 115, 90, 12, 12);
+ellipse(width - 85, 95, 12, 12);
 
 }
+
+// floating cloud
+fill(255);
+noStroke();
+ellipse(cloudOne, 80, 80, 40);
+ellipse(cloudOne - 40, 100, 60, 25);
+ellipse(cloudOne + 50, 105, 70, 30);
+
+cloudOne = cloudOne + 1;
+if(cloudOne > width + 80){
+cloudOne = -80;}
+
+
+// REDEYE body
+fill(247,104,198);
+stroke(255,8,170);
+strokeWeight(6);
+rect(width/2 - 40, 330, 90, 50, 15);
+
+// ears
+fill(247,104,198);
+stroke(252,237,131);
+ellipse(width/2 - 55, 320, 35, 50);
+ellipse(width/2 + 65, 320, 35, 50);
+
+
+// blinking red communication power
+fill(255, 0, 0, random(80, 255));
+noStroke();
+ellipse(width/2 + 60, 350, 25, 25);
 
 
 //tree
@@ -87,14 +108,12 @@ velocity = 0;
  
  }
 
-function mousePressed(){ //make sun darker
+function mousePressed() {
 
-  if (darksun>=255) {
-    darksun=0;
+// check if mouse clicked the moon
 
-  } else {
-    darksun=darksun+20;
-
+let d = dist(mouseX, mouseY, width - 100, 80);
+if(d < 60){ showEgg = true;
   
   }
 
