@@ -5,10 +5,55 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Peaceful Voices</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<style>
+
+/* Music note style */
+
+.music-note{
+position:fixed;
+font-size:40px;
+opacity:0.7;
+animation: floatNotes 8s linear infinite;
+pointer-events:none;
+}
+
+/* Different starting positions */
+.note1{left:10%;
+animation-delay:0s;
+}
+.note2{left:35%;
+animation-delay:2s;
+}
+
+.note3{left:60%;
+animation-delay:4s;
+
+}
+
+.note4{left:85%;
+animation-delay:6s;
+}
+
+/* Animation movement */
+@keyframes floatNotes{0%{top:100%;
+transform:translateX(0px);
+}
+50%{transform:translateX(30px);
+}
+100%{top:-10%;
+transform:translateX(-30px);
+}
+}
+</style>
 </head>
 <body>
-	<h1>The sound she hear everyday,everywahere, and everytime.</h1>
-	<p>RedEyes always sing along with this voices every morning. It become her peaceful morning routine.</p>
+	<div class="music-note note1">♪</div>
+	<div class="music-note note2">♫</div>
+	<div class="music-note note3">♬</div>
+	<div class="music-note note4">♩</div>
+	<h1>Music Through My World</h1>
+	<p>Welcome to the sounds of my world. Sound can create memories and emotions that pictures alone cannot show. This audio represents the atmosphere of my hometown and brings a different experience into REDEYE’s World. Every sound creates a feeling of peace, imagination, and connection, allowing visitors to experience my world in a different way. Close your eyes, listen carefully, and enjoy the journey.</p>
+	<p> Press play and experience the sound of my world.</p>
 </body>
 </html>
 </br>
