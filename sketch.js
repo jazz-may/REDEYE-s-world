@@ -1,5 +1,10 @@
 let cloudOne= 50 ; //variabl for x coordinate of cloud
 var darksun =0;  //color of sun
+let rabbitY=300; //y position
+let velocity= -12; // jump speed
+let gravity=0; //falling force
+let groundY=300; //ground level
+let bounce= -12; // check if in air
 
 //The setup function only happens once
 function setup() {
@@ -32,7 +37,7 @@ function draw() {
  fill(247,104,198);
  stroke(255,8,170);
  strokeWeight(6);
- rect(400,300,90,50);
+ rect(400,rabbitY,90,50);
 
 //ears
  stroke(252,237,131);
@@ -40,6 +45,22 @@ function draw() {
 
  stroke(252,237,131);
  ellipse(502,289,35);
+
+//move rabbit
+ rabbitY += velocity;
+ velocity += gravity;
+
+ // Stop rabbit at ground level
+if (rabbitY >= groundY){
+
+// Keep rabbit on ground
+rabbitY = groundY;
+
+// Stop automatic jumping
+velocity = 0;
+
+}
+
 
 //tree
  
@@ -59,9 +80,10 @@ function draw() {
  ellipse(cloudOne,50,80,40);
  ellipse(cloudOne - 40,100,60,20);
  ellipse(cloudOne + 60,150,40,20);
+
  cloudOne= frameCount%width
 
- //cloud2
+ 
  
  }
 
@@ -72,8 +94,13 @@ function mousePressed(){ //make sun darker
 
   } else {
     darksun=darksun+20;
+
+  
   }
 
   
-
 }
+
+  
+
+
