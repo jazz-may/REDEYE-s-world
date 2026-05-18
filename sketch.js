@@ -5,7 +5,7 @@ let showEgg= false; // secret egg hidden at first
 
 //The setup function only happens once
 function setup() {
-	createCanvas(windowWidth/2,500); //create a canvas
+  createCanvas(windowWidth/2,500); //create a canvas
 }
 
 //The draw function happens over and over again
@@ -24,7 +24,7 @@ noStroke();
 ellipse(
 random(width),
 random(0,250),
-random(2,6)
+random(2,5)
 );
 
 }
@@ -33,13 +33,12 @@ random(2,6)
 // ---------- Moon ----------
 moonFade += fadeSpeed;
 
-if(moonFade<120 || moonAlpha>255){
+if(moonFade<120 || moonFade>255){
 fadeSpeed *= -1;
 }
 
 fill(240,240,240,moonFade);
 noStroke();
-
 ellipse(width-100,80,100,100);
 
 
@@ -52,23 +51,20 @@ ellipse(width-80,90,10,10);
 ellipse(width-105,100,8,8);
 
 
-// ---------- Hidden Egg ----------
-if(showEgg==true){
+// secret egg appears after clicking moon
 
-fill(255);
-stroke(255,120,180);
-strokeWeight(4);
+  if (showEgg === true) {
+    fill(255);
+    stroke(255, 120, 180);
+    strokeWeight(4);
+    ellipse(width - 100, 180, 60, 80);
+    fill(255, 120, 180);
+    noStroke();
+    ellipse(width - 100, 165, 12, 12);
+    ellipse(width - 115, 190, 10, 10);
+    ellipse(width - 85, 195, 10, 10);
 
-ellipse(width-100,80,60,80);
-
-fill(255,120,180);
-
-ellipse(width-100,70,10);
-ellipse(width-115,90,10);
-ellipse(width-85,95,10);
-
-}
-
+  }
 
 // ---------- Grass ----------
 fill(35,94,4);
@@ -92,12 +88,15 @@ triangle(80,120,20,300,140,300);
 
 // ---------- Moving Cloud ----------
 fill(255);
-
 ellipse(cloudOne,60,80,40);
-
 ellipse(cloudOne-40,70,60,30);
-
 ellipse(cloudOne+40,70,60,30);
+
+// second moving cloud
+
+ellipse(cloudOne+250,130,70,35);
+ellipse(cloudOne+210,140,55,25);
+ellipse(cloudOne+290,140,55,25);
 
 
 // move cloud
@@ -110,11 +109,21 @@ cloudOne=-50;
 }
 
 }
-  
+
+// click moon to show/hide egg
+
+function mousePressed(){
+
+let d = dist(mouseX, mouseY, width-100,80);
+if(d < 60){
+showEgg = !showEgg;
+}
+
+}
 
   
 
-
   
 
 
+  
